@@ -9,7 +9,7 @@ vnets = {
   vnet1 = {
     name                = "ashish-vnet2"
     location            = "centralindia"
-    resource_group_name = "ashish-rg2"
+    resource_group_name = "ashish-rg3"
     address_space       = ["10.1.0.0/16"]
   }
 }
@@ -17,7 +17,7 @@ vnets = {
 snets = {
   frontend_snet = {
     name                 = "frontend_subnet"
-    resource_group_name  = "ashish-rg2"   # FIXED
+    resource_group_name  = "ashish-rg3"   # FIXED
     virtual_network_name = "ashish-vnet2" # FIXED (was ashish-vnet1)
     address_prefixes     = ["10.1.1.0/24"]
   }
@@ -27,7 +27,7 @@ pips = {
   pip1 = {
     name                = "pip3"
     location            = "centralindia" # FIXED (was East US – must be same region as NIC)
-    resource_group_name = "ashish-rg2"
+    resource_group_name = "ashish-rg3"
     allocation_method   = "Static"
   }
 }
@@ -36,7 +36,7 @@ nics = {
   nic1 = {
     name                 = "ashish-nic2"
     location             = "centralindia"
-    resource_group_name  = "ashish-rg2"
+    resource_group_name  = "ashish-rg3"
     subnet_name          = "frontend_subnet"
     virtual_network_name = "ashish-vnet2"
   }
@@ -46,7 +46,7 @@ vms = {
   vm1 = {
     vm_name             = "frontend-ashish-vm1"
     location            = "centralindia"
-    resource_group_name = "ashish-rg2"
+    resource_group_name = "ashish-rg3"
     size                = "Standard_D2s_v3" # FIXED (Standard_VS2V3 does not exist)
     admin_username      = "ashishadmin"
     admin_password      = "Asak@1234"
@@ -59,7 +59,7 @@ bastion = {
   bastion1 = {
     name                 = "ashish-bastion2"
     location             = "centralindia"
-    resource_group_name  = "ashish-rg2"
+    resource_group_name  = "ashish-rg3"
     public_ip_name       = "pip3"
     bastion_subnet_name  = "AzureBastionSubnet"
     virtual_network_name = "ashish-vnet2"
@@ -71,10 +71,9 @@ nsgs = {
   frontend_nsg = {
     name                 = "frontend-nsg"
     location             = "centralindia"
-    resource_group_name  = "ashish-rg2"
+    resource_group_name  = "ashish-rg3"
     subnet_name          = "frontend_subnet"
     virtual_network_name = "ashish-vnet2"
-    resource_group_name  = "ashish-rg2"
 
     security_rules = {
       allow_ssh = {
