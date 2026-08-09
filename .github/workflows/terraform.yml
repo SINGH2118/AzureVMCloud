@@ -1,4 +1,4 @@
-name: Terraform CI
+name: Terraform CI-CD
 
 on:
   push:
@@ -9,11 +9,14 @@ on:
     branches:
       - main
 
+
 permissions:
   id-token: write
   contents: read
 
+
 jobs:
+
   terraform:
     name: Terraform Validation
     runs-on: ubuntu-latest
@@ -23,6 +26,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -30,21 +34,61 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+
       - name: Terraform Init
-        working-directory: ./enviroment/preprod
         run: terraform init
+        working-directory: ./environment/preprod
+
 
       - name: Terraform Format Check
-        working-directory: ./enviroment/preprod
         run: terraform fmt -check -recursive
+        working-directory: ./environment/preprod
+
 
       - name: Terraform Validate
-        working-directory: ./enviroment/preprod
         run: terraform validate
+        working-directory: ./environment/preprod
+
 
       - name: Terraform Plan
-        working-directory: ./enviroment/preprod
         run: terraform plan
+        working-directory: ./environment/preprod
+
+
+
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: ubuntu-latest
+
+    needs: terraform
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./environment/preprod
+
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./environment/preprod
