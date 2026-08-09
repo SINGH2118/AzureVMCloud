@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
+      - feature/newfeaturebranch
 
   pull_request:
     branches:
       - main
-
+      
 jobs:
   terraform:
     name: Terraform Validation
