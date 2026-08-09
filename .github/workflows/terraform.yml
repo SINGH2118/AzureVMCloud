@@ -1,11 +1,17 @@
 name: Terraform CI/CD
 
 on:
+
+  push:
+    branches:
+      - feature/newfeaturebranch
+
   pull_request:
     branches:
       - main
 
   workflow_dispatch:
+
 
 jobs:
 
@@ -13,66 +19,74 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    environment: preprod
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
 
-    - name: Azure Login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform Init
-      working-directory: ./environment/preprod
-      run: terraform init
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Terraform Format
-      working-directory: ./environment/preprod
-      run: terraform fmt -check
 
-    - name: Terraform Validate
-      working-directory: ./environment/preprod
-      run: terraform validate
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform Plan
-      working-directory: ./environment/preprod
-      run: terraform plan
+
+      - name: Terraform Init
+        working-directory: ./environment/preprod
+        run: terraform init
+
+
+      - name: Terraform Format
+        working-directory: ./environment/preprod
+        run: terraform fmt -check
+
+
+      - name: Terraform Validate
+        working-directory: ./environment/preprod
+        run: terraform validate
+
+
+      - name: Terraform Plan
+        working-directory: ./environment/preprod
+        run: terraform plan
+
 
 
   terraform-apply:
 
     needs: terraform-plan
 
+    environment:
+      name: preprod
+
     runs-on: ubuntu-latest
 
-    environment: preprod
 
     steps:
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
 
-    - name: Azure Login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
 
-    - name: Terraform Init
-      working-directory: ./environment/preprod
-      run: terraform init
+      - name: Terraform Init
+        working-directory: ./environment/preprod
+        run: terraform init
 
 
-    - name: Terraform Apply
-      working-directory: ./environment/preprod
-      run: terraform apply
+      - name: Terraform Apply
+        working-directory: ./environment/preprod
+        run: terraform apply -auto-approve
