@@ -1,8 +1,10 @@
 name: Terraform CI/CD
 
+permissions:
+  id-token: write
+  contents: read
 
 on:
-
   push:
     branches:
       - feature/newfeaturebranch
@@ -14,7 +16,6 @@ on:
   workflow_dispatch:
 
 
-
 jobs:
 
 
@@ -22,7 +23,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    environment: preprod
 
 
     steps:
