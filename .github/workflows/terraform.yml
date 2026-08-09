@@ -41,22 +41,22 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
 
 
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
 
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
 
 
       - name: Terraform Plan
         run: terraform plan
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
 
 
 
@@ -86,9 +86,9 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
 
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
