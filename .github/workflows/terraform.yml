@@ -3,12 +3,15 @@ name: Terraform CI
 on:
   push:
     branches:
-      - main
       - feature/newfeaturebranch
 
   pull_request:
     branches:
       - main
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   terraform:
@@ -30,19 +33,18 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-
       - name: Terraform Init
-        working-directory: ./enviroment/preprod
+        working-directory: ./environment
         run: terraform init
 
       - name: Terraform Format Check
-        working-directory: ./enviroment/preprod
-        run: terraform fmt -check
+        working-directory: ./environment
+        run: terraform fmt -check -recursive
 
       - name: Terraform Validate
-        working-directory: ./enviroment/preprod
+        working-directory: ./environment
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: ./enviroment/preprod
+        working-directory: ./environment
         run: terraform plan
