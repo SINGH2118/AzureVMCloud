@@ -1,9 +1,5 @@
 rgs = {
   rg1 = {
-    name     = "ashish-rg2"
-    location = "centralindia"
-  }
-  rg1 = {
     name     = "ashish-rg3"
     location = "centralindia"
   }
