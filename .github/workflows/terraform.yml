@@ -9,7 +9,7 @@ on:
   pull_request:
     branches:
       - main
-      
+
 jobs:
   terraform:
     name: Terraform Validation
@@ -23,17 +23,17 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
         run: terraform init
 
       - name: Terraform Format Check
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
         run: terraform fmt -check
 
       - name: Terraform Validate
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: ./environment/preprod
+        working-directory: ./enviroment/preprod
         run: terraform plan
