@@ -13,9 +13,9 @@ module "vnet" {
 
 
 module "subnet" {
-  depends_on    = [module.vnet]
-  source        = "../../modules/subnet"
-  subnets       = var.snets
+  depends_on = [module.vnet]
+  source     = "../../modules/subnet"
+  subnets    = var.snets
 
 }
 
@@ -46,7 +46,7 @@ module "bastion" {
 
 module "nsg" {
   depends_on = [module.rg, module.vnet, module.subnet]
-  source = "../../modules/network_security_group"
-  nsgs = var.nsgs
+  source     = "../../modules/network_security_group"
+  nsgs       = var.nsgs
 }
 

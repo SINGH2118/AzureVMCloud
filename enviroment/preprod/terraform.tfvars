@@ -3,7 +3,7 @@ rgs = {
     name     = "ashish-rg2"
     location = "centralindia"
   }
-    rg1 = {
+  rg1 = {
     name     = "ashish-rg3"
     location = "centralindia"
   }
@@ -61,22 +61,22 @@ vms = {
 
 bastion = {
   bastion1 = {
-    name                = "ashish-bastion2"
-    location            = "centralindia"
-    resource_group_name = "ashish-rg2"
+    name                 = "ashish-bastion2"
+    location             = "centralindia"
+    resource_group_name  = "ashish-rg2"
     public_ip_name       = "pip3"
     bastion_subnet_name  = "AzureBastionSubnet"
     virtual_network_name = "ashish-vnet2"
-    address_prefixes      = ["10.1.0.0/26"]
+    address_prefixes     = ["10.1.0.0/26"]
   }
 }
 
 nsgs = {
   frontend_nsg = {
-    name                = "frontend-nsg"
-    location            = "centralindia"
-    resource_group_name = "ashish-rg2"
-    subnet_name         =  "frontend_subnet"
+    name                 = "frontend-nsg"
+    location             = "centralindia"
+    resource_group_name  = "ashish-rg2"
+    subnet_name          = "frontend_subnet"
     virtual_network_name = "ashish-vnet2"
     resource_group_name  = "ashish-rg2"
 
@@ -119,10 +119,10 @@ nsgs = {
 
       allow_https = {
         name                       = "Allow-HTTPS"
-        priority                  = 130
+        priority                   = 130
         direction                  = "Inbound"
         access                     = "Allow"
-        protocol                  = "Tcp"
+        protocol                   = "Tcp"
         source_port_range          = "*"
         destination_port_range     = "443"
         source_address_prefix      = "*"
