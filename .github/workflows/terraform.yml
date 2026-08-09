@@ -34,17 +34,17 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: ./enviroment
+        working-directory: ./enviroment/preprod
         run: terraform init
 
       - name: Terraform Format Check
-        working-directory: ./enviroment
+        working-directory: ./enviroment/preprod
         run: terraform fmt -check -recursive
 
       - name: Terraform Validate
-        working-directory: ./enviroment
+        working-directory: ./enviroment/preprod
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: ./enviroment
+        working-directory: ./enviroment/preprod
         run: terraform plan
