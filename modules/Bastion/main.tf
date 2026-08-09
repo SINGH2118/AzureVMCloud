@@ -3,7 +3,7 @@
 resource "azurerm_subnet" "bastion1" {
 
   name                 = "AzureBastionSubnet"
-  resource_group_name  = "ashish-rg2"
+  resource_group_name  = "ashish-rg3"
   virtual_network_name = "ashish-vnet2"
   address_prefixes     = ["10.1.0.0/26"]
 
